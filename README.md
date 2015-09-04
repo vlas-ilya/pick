@@ -10,11 +10,7 @@ gulp build
 test
 ```
 npm install
-gulp clear
-gulp copyTestFiles
-gulp buildTestFiles
-gulp testing
-gulp clear
+gulp test
 ```
 
 example:
