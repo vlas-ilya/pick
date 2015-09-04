@@ -1,6 +1,22 @@
 # buildWithFields
 Function builds a new object based on the base object, including only the specified field
 
+build
+```
+npm install
+gulp build
+```
+
+test
+```
+npm install
+gulp clear
+gulp copyTestFiles
+gulp buildTestFiles
+gulp testing
+gulp clear
+```
+
 example:
 
 ```
@@ -42,7 +58,7 @@ var a = {
   }
 };
 
-var result = buildObjectWithFields(a, ["uuid", "numbers", "subObject", "objects.uuid", "objects.number", "objects.subObject.uuid"]);
+var result = pick(a, ["uuid", "numbers", "subObject", "objects.uuid", "objects.number", "objects.subObject.uuid"]);
 ```
 
 result is  
