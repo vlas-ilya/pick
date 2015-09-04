@@ -1,6 +1,6 @@
 var pick = (function () {
 
-	'use strict';
+    'use strict';
 
     //= require 'lib.js'
 
