@@ -1,0 +1,12 @@
+{
+  "name": "pick",
+  "version": "1.0.0",
+  "devDependencies": {
+    "gulp": "~3.9.0",
+    "gulp-uglify": "~1.4.0",
+    "gulp-concat": "~2.6.0",
+    "gulp-include": "~2.0.2",
+    "gulp-jasmine": "~2.0.1",
+    "gulp-clean": "~0.3.1"
+  }
+}
