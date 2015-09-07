@@ -2,7 +2,8 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     include = require('gulp-include'),
     jasmine = require('gulp-jasmine'),
-    clean = require('gulp-clean');
+    clean = require('gulp-clean'),
+    rename = require("gulp-rename");
 
 gulp.task('clear', function (cb) {
     return gulp.src(['build/', 'export/'], {read: false})
@@ -49,12 +50,14 @@ gulp.task('test', ['testing'], function () {
 gulp.task('angular', ['clear'], function () {
     return gulp.src(['./src/angular.js'])
     .pipe(include())
-    .pipe(gulp.dest('./build/pick/'));
+    .pipe(rename("./src/pick.js"))
+    .pipe(gulp.dest('./build/angular/'));
 });
 
 gulp.task('angular-export', function () {
     return gulp.src(['./src/angular.js'])
     .pipe(include())
     .pipe(uglify())
-    .pipe(gulp.dest('./export/pick/angular/'));
+    .pipe(rename("./src/pick.js"))
+    .pipe(gulp.dest('./export/angular/'));
 });
