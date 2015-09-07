@@ -1,16 +1,22 @@
 # buildWithFields
 Function builds a new object based on the base object, including only the specified field
 
-build
+export
 ```
 npm install
-gulp build
+gulp export
 ```
 
 test
 ```
 npm install
 gulp test
+```
+
+build to angular
+```
+npm install
+gulp angular
 ```
 
 example:
