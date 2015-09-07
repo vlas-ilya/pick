@@ -16,7 +16,7 @@ gulp.task('build', ['clear'], function () {
     .pipe(gulp.dest('./build/pick/'));
 });
 
-gulp.task('export', ['clear'], function () {
+gulp.task('export', function () {
     return gulp.src(['./src/pick.js'])
     .pipe(include())
     .pipe(uglify())
@@ -44,4 +44,17 @@ gulp.task('testing', ['buildTestFiles'], function (cb) {
 
 gulp.task('test', ['testing'], function () {
     gulp.start('clear');
+});
+
+gulp.task('angular', ['clear'], function () {
+    return gulp.src(['./src/angular.js'])
+    .pipe(include())
+    .pipe(gulp.dest('./build/pick/'));
+});
+
+gulp.task('angular-export', function () {
+    return gulp.src(['./src/angular.js'])
+    .pipe(include())
+    .pipe(uglify())
+    .pipe(gulp.dest('./export/pick/angular/'));
 });

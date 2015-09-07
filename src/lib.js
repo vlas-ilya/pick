@@ -71,6 +71,10 @@ lib.copyFields = function(from, to, field, pattern) {
     }    
 }
 
+lib.copy = function (object) {
+    return JSON.parse(JSON.stringify(object));
+}
+
 lib.pick = function (object, pattern) {
     if (pattern instanceof Array) {
         pattern = lib.createPattern(pattern);
@@ -80,5 +84,5 @@ lib.pick = function (object, pattern) {
     for (var key in pattern) {
         lib.copyFields(object, newObject, key, pattern);
     }
-    return newObject;
+    return lib.copy(newObject);
 };
