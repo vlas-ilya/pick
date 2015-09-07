@@ -11,17 +11,35 @@ gulp.task('clear', function (cb) {
     cb(err);
 });
 
-gulp.task('build', ['clear'], function () {
+gulp.task('export', ['export-min'], function () {
     return gulp.src(['./src/pick.js'])
     .pipe(include())
-    .pipe(gulp.dest('./build/pick/'));
+    .pipe(gulp.dest('./export/'));
 });
 
-gulp.task('export', function () {
+gulp.task('export-min', function (cb) {
     return gulp.src(['./src/pick.js'])
     .pipe(include())
     .pipe(uglify())
+    .pipe(rename("./pick.min.js"))
     .pipe(gulp.dest('./export/'));
+    cb(err);
+});
+
+gulp.task('angular-min', function (cb) {
+    return gulp.src(['./src/angular.js'])
+    .pipe(rename("./pick.min.js"))
+    .pipe(include())
+    .pipe(uglify())
+    .pipe(gulp.dest('./export/angular/'));
+    cb(err);
+});
+
+gulp.task('angular', ['angular-min'], function () {
+    return gulp.src(['./src/angular.js'])
+    .pipe(include())
+    .pipe(rename("./pick.js"))
+    .pipe(gulp.dest('./export/angular/'));
 });
 
 gulp.task('copyTestFiles', ['clear'], function (cb) {
@@ -47,17 +65,3 @@ gulp.task('test', ['testing'], function () {
     gulp.start('clear');
 });
 
-gulp.task('angular', ['clear'], function () {
-    return gulp.src(['./src/angular.js'])
-    .pipe(include())
-    .pipe(rename("./src/pick.js"))
-    .pipe(gulp.dest('./build/angular/'));
-});
-
-gulp.task('angular-export', function () {
-    return gulp.src(['./src/angular.js'])
-    .pipe(include())
-    .pipe(uglify())
-    .pipe(rename("./src/pick.js"))
-    .pipe(gulp.dest('./export/angular/'));
-});

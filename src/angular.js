@@ -1,5 +1,8 @@
-angular.module('PickService', [])
-.service('Pick', function () {
+angular
+.module('PickModule', [])
+.factory('PickModule.pick', [function () {
+
 	//= require 'lib.js'
-    this.pick = lib.pick;
-});
+
+    return lib.pick;
+}]);

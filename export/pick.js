@@ -1,1 +1,92 @@
-var pick=function(){"use strict";var r={};return r.comparator=function(r,t){if(null==r||null==t)return 0;for(var n=0;n<r.length&&n<t.length;n++){if(void 0==r[n])return-1;if(void 0==t[n])return 1;if(r[n]<t[n])return-1;if(r[n]>t[n])return 1}return 0},r.isEmpty=function(r){return void 0==r?!0:(r instanceof Array||"string"==typeof r)&&0==r.length?!0:"object"==typeof r&&0===Object.keys(r).length?!0:!1},r.createPath=function(t,n){var e=n[0];return void 0==e?{}:(void 0==t[e]&&(t[e]={}),void r.createPath(t[e],n.slice(1)))},r.createPattern=function(t){var n={};return t.map(function(r){return r.split(".")}).sort(r.comparator).forEach(function(t){r.createPath(n,t)}),n},r.copyFields=function(t,n,e,i){if(r.isEmpty(i[e]))n[e]=t[e];else if(t[e]instanceof Array){n[e]=[];for(var o=0;o<t[e].length;o++){n[e][o]={};for(var c in i[e])r.copyFields(t[e][o],n[e][o],c,i[e])}}else if(t[e]instanceof Object){n[e]={};for(var c in i[e])r.copyFields(t[e],n[e],c,i[e])}},r.copy=function(r){return JSON.parse(JSON.stringify(r))},r.pick=function(t,n){n instanceof Array&&(n=r.createPattern(n));var e={};for(var i in n)r.copyFields(t,e,i,n);return r.copy(e)},r.pick}();
+var pick = (function () {
+    'use strict';
+    
+    var lib = {};
+    
+    lib.comparator = function (a, b) {
+        if (a == null || b == null) {
+            return 0;
+        }
+        for (var i = 0; i < a.length && i < b.length; i++) {
+            if (a[i] == undefined) {
+                return -1;
+            } else if (b[i] == undefined) {
+                return 1;
+            } else if (a[i] < b[i]) {
+                return -1;
+            } else if (a[i] > b[i]) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+    
+    lib.isEmpty = function (object) {
+        if (object == undefined) {
+            return true;
+        }
+        if ((object instanceof Array || typeof(object) === "string") && object.length == 0) {
+            return true;
+        }
+        if (typeof(object) === "object" && Object.keys(object).length === 0) {
+            return true;
+        }
+        return false;
+    }
+    
+    lib.createPath = function (object, path) {
+        var elem = path[0];
+        if (elem == undefined) {
+            return {};
+        }
+        if (object[elem] == undefined) {
+            object[elem] = {};
+        }
+        lib.createPath(object[elem], path.slice(1))
+    }
+    
+    lib.createPattern = function(fields) {
+        var pattern = {};
+        fields.map(function (field) { return field.split("."); })
+              .sort(lib.comparator)
+              .forEach(function (path) { lib.createPath(pattern, path); });
+        return pattern;
+    }
+    
+    lib.copyFields = function(from, to, field, pattern) {
+        if (lib.isEmpty(pattern[field])) {
+            to[field] = from[field];
+        } else if (from[field] instanceof Array) {
+            to[field] = [];
+            for (var i = 0; i < from[field].length; i++) {
+                to[field][i] = {};
+                for (var key in pattern[field]) {
+                    lib.copyFields(from[field][i], to[field][i], key, pattern[field]);
+                }
+            }
+        } else if (from[field] instanceof Object) {
+            to[field] = {};
+            for (var key in pattern[field]) {
+                lib.copyFields(from[field], to[field], key, pattern[field]);
+            }
+        }    
+    }
+    
+    lib.copy = function (object) {
+        return JSON.parse(JSON.stringify(object));
+    }
+    
+    lib.pick = function (object, pattern) {
+        if (pattern instanceof Array) {
+            pattern = lib.createPattern(pattern);
+        }
+    
+        var newObject = {};
+        for (var key in pattern) {
+            lib.copyFields(object, newObject, key, pattern);
+        }
+        return lib.copy(newObject);
+    };
+
+    return lib.pick;
+})();
