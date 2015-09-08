@@ -1,6 +1,6 @@
 angular
 .module('PickModule', [])
-.factory('PickModule.pick', [function () {
+.factory('pick', [function () {
 
 	//= require 'lib.js'
 

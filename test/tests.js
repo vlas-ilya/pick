@@ -23,6 +23,7 @@ describe("Testing method comparator", function() {
     it("Testing for Less", function() {
         var a = [1, 2, 2, 3, 4];
         var b = [1, 2, 3, 4, 5];
+
         expect(lib.comparator(a, b)).toBe(-1);
     });
 
@@ -54,6 +55,7 @@ describe("Testing method createPath", function () {
             }
         }
         lib.createPath(a, path);
+
         expect(a).toEqual(pattern);
     });
 });
@@ -74,6 +76,7 @@ describe("Testing method createPattern", function () {
             "subObject": {},
             "uuid": {}
         };
+
         expect(a).toEqual(pattern);
     });
 });
@@ -148,7 +151,8 @@ describe("Testing method pick", function () {
     };
 
     it("Testing #1", function () {       
-        var result = lib.pick(a, ["uuid", "numbers", "subObject", "objects.uuid", "objects.number", "objects.subObject.uuid"]);        
+        var result = lib.pick(a, ["uuid", "numbers", "subObject", "objects.uuid", "objects.number", "objects.subObject.uuid"]);  
+
         expect(result).toEqual(pattern);
     });
 
@@ -166,6 +170,7 @@ describe("Testing method pick", function () {
             "subObject": {},
             "uuid": {},
         });
+        
         expect(result).toEqual(pattern);
     });
 });

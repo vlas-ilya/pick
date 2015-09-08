@@ -1,6 +1,6 @@
 angular
 .module('PickModule', [])
-.factory('PickModule.pick', [function () {
+.factory('pick', [function () {
 	'use strict';
 	
 	var lib = {};
