@@ -1,9 +1,13 @@
-var pick = (function () {
+(function () {
 
     //= require 'lib.js'
 
-    return {
-        pick: lib.pick,
-        unpick: lib.unpick
-    };
+    if (typeof define == 'function' && define.amd) {
+        define('pick', [], function() {
+            return {
+                pick: lib.pick,
+                unpick: lib.unpick
+            };
+        });
+    }
 })();

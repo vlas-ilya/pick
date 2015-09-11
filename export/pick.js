@@ -1,4 +1,4 @@
-var pick = (function () {
+(function () {
     'use strict';
     
     var lib = {};
@@ -116,8 +116,12 @@ var pick = (function () {
         return newObject;
     }
 
-    return {
-        pick: lib.pick,
-        unpick: lib.unpick
-    };
+    if (typeof define == 'function' && define.amd) {
+        define('pick', [], function() {
+            return {
+                pick: lib.pick,
+                unpick: lib.unpick
+            };
+        });
+    }
 })();
