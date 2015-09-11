@@ -72,6 +72,22 @@ var pick = (function () {
         }    
     }
     
+    lib.removeFields = function(object, field, pattern) {
+        if (lib.isEmpty(pattern[field])) {
+            delete object[field];
+        } else if (object[field] instanceof Array) {
+            for (var i = 0; i < object[field].length; i++) {
+                for (var key in pattern[field]) {
+                    lib.removeFields(object[field][i], key, pattern[field]);
+                }
+            }
+        } else if (object[field] instanceof Object) {
+            for (var key in pattern[field]) {
+                lib.removeFields(object[field], key, pattern[field]);
+            }
+        }
+    }
+    
     lib.copy = function (object) {
         return JSON.parse(JSON.stringify(object));
     }
@@ -87,6 +103,21 @@ var pick = (function () {
         }
         return lib.copy(newObject);
     };
+    
+    lib.unpick = function (object, pattern) {
+        if (pattern instanceof Array) {
+            pattern = lib.createPattern(pattern);
+        }
+    
+        var newObject = lib.copy(object);
+        for (var key in pattern) {
+            lib.removeFields(newObject, key, pattern);
+        }
+        return newObject;
+    }
 
-    return lib.pick;
+    return {
+        pick: lib.pick,
+        unpick: lib.unpick
+    };
 })();
