@@ -1,6 +1,6 @@
 {
   "name": "pick-unpick",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Building a new object based on the selected fields",
   "homepage": "https://github.com/vlas-ilya/pick",
   "main": "export/pick.js",

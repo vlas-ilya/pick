@@ -108,7 +108,7 @@ Building a new object without selected fields.
 ## Usage
 
 ```js
-var pick = require('pick-unpick').unpick
+var unpick = require('pick-unpick').unpick
 
 var a = {
   uuid: "20f3148c-5186-11e5-a840-3085a99f8ed4",
@@ -148,7 +148,7 @@ var a = {
   }
 };
 
-var result = lib.unpick(a, ["name", "objects.name", "objects.uuid", "objects.number", "objects.subObject.name"]);
+var result = unpick(a, ["name", "objects.name", "objects.uuid", "objects.number", "objects.subObject.name"]);
 ```
 
 And result is
