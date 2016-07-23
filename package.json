@@ -1,6 +1,16 @@
 {
   "name": "pick",
   "version": "1.0.0",
+  "description": "Building a new object based on the selected fields",
+  "homepage": "https://github.com/vlas-ilya/pick",
+  "main": "export/pick.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vlas-ilya/pick.git"
+  },
+  "scripts": {
+    "test": "node test.js"
+  }
   "devDependencies": {
     "gulp": "~3.9.0",
     "gulp-uglify": "~1.4.0",

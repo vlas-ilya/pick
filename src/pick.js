@@ -1,6 +1,10 @@
-var pick = (function () {
+;(function () {
 
     //= require 'lib.js'
 
-    return lib.pick;
+    if (typeof module == 'object') {
+		module.exports = lib.pick;
+	} else {
+		window.pick = lib.pick;
+	}
 })();

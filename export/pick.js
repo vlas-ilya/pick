@@ -1,4 +1,4 @@
-var pick = (function () {
+;(function () {
     'use strict';
     
     var lib = {};
@@ -88,5 +88,9 @@ var pick = (function () {
         return lib.copy(newObject);
     };
 
-    return lib.pick;
+    if (typeof module == 'object') {
+		module.exports = lib.pick;
+	} else {
+		window.pick = lib.pick;
+	}
 })();
